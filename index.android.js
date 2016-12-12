@@ -9,23 +9,43 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
+  Navigator,
   View
 } from 'react-native';
 
+import Register from './register';
+import Login from './login';
+import Root from './root';
+import Home from './home';
+import Update from './update';
+
 export default class AwesomeProject extends Component {
+  
+  renderScene(route, navigator) {
+    if (route.name == 'root') {
+      return <Root navigator={navigator} />
+    }
+    if (route.name == 'register') {
+      return <Register navigator={navigator} />
+    }
+    if (route.name == 'login') {
+      return <Login navigator={navigator} />
+    }
+    if (route.name == 'home') {
+      return <Home navigator={navigator} {...route.passProps}/>
+    }
+    if(route.name == 'update') {
+      return <Update navigator={navigator} {...route.passProps} />
+    }
+  }
+  
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+        <Navigator
+          initialRoute={{name: 'root'}}
+          renderScene={this.renderScene.bind(this)} 
+          />
       </View>
     );
   }
@@ -34,19 +54,7 @@ export default class AwesomeProject extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
 
