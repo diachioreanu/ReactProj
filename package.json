@@ -1,5 +1,5 @@
 {
-  "name": "AwesomeProject",
+  "name": "ReactProj",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,8 +7,15 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "15.3.2",
-    "react-native": "0.36.0"
+    "react": "^15.4.1",
+    "react-native": "0.39.2",
+    "react-redux": "^5.0.1",
+    "redux": "^3.0.0",
+    "redux-logger": "^2.7.4",
+    "redux-thunk": "^2.1.0",
+    "socket.io-client": "^1.7.1",
+    "socketio-jwt": "^4.5.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "jest": {
     "preset": "jest-react-native"
@@ -16,7 +23,7 @@
   "devDependencies": {
     "babel-jest": "16.0.0",
     "babel-preset-react-native": "1.9.0",
-    "jest": "16.0.2",
+    "jest": "16.0.1",
     "jest-react-native": "16.0.0",
     "react-test-renderer": "15.3.2"
   }

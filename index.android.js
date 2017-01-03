@@ -1,61 +1,21 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React, {Component} from 'react';
+import {AppRegistry} from 'react-native';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import createLogger from 'redux-logger';
+import thunk from 'redux-thunk';
+import {medReducer} from "./src/med";
+import {authReducer} from "./src/auth";
+import {Router} from "./src/Router";
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  Navigator,
-  View
-} from 'react-native';
+const rootReducer = combineReducers({med: medReducer, auth: authReducer});
+const store = createStore(rootReducer, applyMiddleware(thunk, createLogger({colors: {}})));
 
-import Register from './register';
-import Login from './login';
-import Root from './root';
-import Home from './home';
-import Update from './update';
-
-export default class AwesomeProject extends Component {
-  
-  renderScene(route, navigator) {
-    if (route.name == 'root') {
-      return <Root navigator={navigator} />
+export default class ReactProj extends Component {
+    render() {
+        return (
+            <Router store={store}/>
+        );
     }
-    if (route.name == 'register') {
-      return <Register navigator={navigator} />
-    }
-    if (route.name == 'login') {
-      return <Login navigator={navigator} />
-    }
-    if (route.name == 'home') {
-      return <Home navigator={navigator} {...route.passProps}/>
-    }
-    if(route.name == 'update') {
-      return <Update navigator={navigator} {...route.passProps} />
-    }
-  }
-  
-  render() {
-    return (
-      <View style={styles.container}>
-        <Navigator
-          initialRoute={{name: 'root'}}
-          renderScene={this.renderScene.bind(this)} 
-          />
-      </View>
-    );
-  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-  },
-});
-
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+AppRegistry.registerComponent('ReactProj', () => ReactProj);
